@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "author": "HB.Z <18611729113@163.com>",
+  "scripts": {
+    "dev": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi setup",
+    "setup": "umi setup",
+    "start": "npm run dev"
+  },
+  "dependencies": {
+    "@ant-design/pro-components": "^2.6.42",
+    "antd": "^5.4.5",
+    "dayjs": "^1.11.10",
+    "hox": "^2.1.1",
+    "i18next": "^23.7.16",
+    "rc-queue-anim": "^2.0.0",
+    "react": "^18.2.0",
+    "react-i18next": "^14.0.0",
+    "umi-request": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.33",
+    "@types/react-dom": "^18.0.11",
+    "@umijs/plugins": "^4.1.0",
+    "typescript": "^5.0.3",
+    "umi": "^4.0.88"
+  }
+}
