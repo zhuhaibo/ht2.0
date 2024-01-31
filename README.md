@@ -30,12 +30,12 @@ yarn install && yarn build
 `src/locale`目录下定义语言，规则：**语言-国家.ts**
 ```js
 
-1. 开启国际化
+# 第1步 开启国际化
 // /src/ConfigSystemSettings/index.ts
 export const locale = true; // 是否开启国际化
 export const defaultLanguage = 'zh-CN'; // 默认语言
 
-2. 语言切换菜单，增加对应选择项
+# 第2步 语言切换菜单，增加对应选择项
 // /src/layouts/language.tsx
 const languageItems: any = [ 
   { key: 'zh-CN', label: '中文' }, 
@@ -43,7 +43,7 @@ const languageItems: any = [
   ···
 ];
 
-3. 创建对应国家语言包文件，在`/src/locale/index.js`导入，并在 `resources` 对象中添加对应配置
+# 第3步 创建对应国家语言包文件，在`/src/locale/index.js`导入，并在 `resources` 对象中添加对应配置
 // /src/locale/index.js
 import enUS from './locales/en-US.json';
 import zhCN from './locales/zh-CN.json';
@@ -54,7 +54,7 @@ resources: {
   ····
 },
 
-4. antd 组件库国际化；antd UI框架自带多语言文件，按需引入即可；
+# 第4步 antd 组件库国际化；antd UI框架自带多语言文件，按需引入即可；
 // /src/layouts/index.tsx
 import zhCN from 'antd/locale/zh_CN';
 import enUS from 'antd/locale/en_US';
