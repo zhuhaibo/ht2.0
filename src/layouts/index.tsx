@@ -2,7 +2,7 @@ import { Outlet } from 'umi';
 import styles from './style.less';
 import RenderMenus from './Menus/menus';
 import RenderTopBar from './TopBar/topbar';
-import HistoryRouter from './PanelTab/HistoryRouter';
+import PanelTabComponent from './PanelTab/HistoryRouter';
 import QueueAnim from 'rc-queue-anim';
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import { waterMarkTitle, panelTab } from '@/ConfigSystemSettings';
@@ -18,7 +18,6 @@ const localeArr: any = {
   "zh-CN": zhCN,
   "en-US": enUS,
 }
-
 
 export default function(){
   const { i18n } = useTranslation();
@@ -37,8 +36,7 @@ export default function(){
                   <div className={styles.Ht_main} style={styleParams}>
                     <QueueAnim type={'bottom'} className="queue-simple">
                       <div key='outlet'> 
-                        {/* <Outlet /> */}
-                        <HistoryRouter Outlet={<Outlet />} />
+                        {panelTab ? <PanelTabComponent Outlet={<Outlet />} /> : <Outlet />}
                       </div>
                     </QueueAnim>
                   </div>

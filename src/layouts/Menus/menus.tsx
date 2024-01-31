@@ -85,10 +85,7 @@ const Index = () => {
         // 名称国际化
         const isLocaleMenuName = (name: string)=> locale ? (translation ? translation[name] : name) || `##Locale Error: (${name})` : name;
         // 数组重构
-        const getMenusItem = (v: any) => ({
-            ...v,
-            icon: <Iconfont type={v.icon} style={{fontSize: 18}}/>,
-        });
+        const getMenusItem = (v: any) => ({ ...v, icon: <Iconfont type={v.icon} style={{fontSize: 18}}/> });
         const resetMenus = ( arr: any ) => (arr.map((v: any)=>{
             v.key = v.id;
             v.label = isLocaleMenuName(v.name);
@@ -98,24 +95,6 @@ const Index = () => {
         // 初始化菜单 item data
         const menusItem  = resetMenus(ajaxMenus);
         const newMenusActive = eachMenusActive(ajaxMenus);
-        set({ 
-            ...commonState, 
-            menus: menusItem,
-            menusActive: newMenusActive,
-            historyRouter: [
-                ...commonState.historyRouter,
-                ...menusItem.filter((res: any)=> res.id === newMenusActive.defaultSelectedKeys )
-            ],
-        });
-        // console.log({ 
-        //     ...commonState, 
-        //     menus: menusItem,
-        //     menusActive: newMenusActive,
-        //     historyRouter: [
-        //         ...commonState.historyRouter,
-        //         ...menusItem.filter((res: any)=> res.id === newMenusActive.defaultSelectedKeys )
-        //     ],
-        // });
         setMenusActive(newMenusActive);
         setState({ ...state, menusLoads: false, menus: menusItem });
     }
@@ -127,11 +106,7 @@ const Index = () => {
         removeParentIdAndAddParentId(newRouterMenusArr);
         createMenus(newRouterMenusArr);
         // 监听浏览器地址变化并设置菜单选中状态
-        const historys = history.listen(() => {
-            console.log(commonState);
-            
-            createMenus(newRouterMenusArr);
-        });
+        const historys = history.listen(() => createMenus(newRouterMenusArr));
         return ()=> historys();
     } ,[commonState.lang]);
 

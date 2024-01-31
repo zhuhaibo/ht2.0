@@ -1,10 +1,10 @@
 // Title
-export const title = '跨国铁路数字单证综合服务平台';
+export const title = '弘泰天元科技有限公司';
 // Logo
 export const logo = '/logo.png'
 export const minlogo = '/minlogo.png'; // 菜单收起时缩小版logo
 // waterMark
-export const waterMarkTitle = '水印-跨国铁路数字单证综合服务平台'; // false
+export const waterMarkTitle = '水印-弘泰天元科技有限公司'; // false
 // init pages
 export const initPath = '/welcome'; 
 // logo link

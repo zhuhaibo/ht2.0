@@ -2,7 +2,7 @@ import React from 'react';
 import { history } from 'umi';
 import styles from '../style.less';
 import QueueAnim from 'rc-queue-anim';
-import { logoPath, logo, minlogo, locale } from '@/ConfigSystemSettings';
+import { title, logo, minlogo, locale } from '@/ConfigSystemSettings';
 import { Space, Dropdown, Button, Badge, Modal, message, Tooltip } from 'antd';
 import { UserOutlined, 
     LogoutOutlined, FullscreenOutlined, HomeFilled, 
@@ -12,7 +12,6 @@ import {useCommonStore} from '@/hooks';
 import LanguageComponent from '../Language/language';
 import PanelTabComponent from '../PanelTab';
 
-const title = '跨国铁路数字单证综合服务平台'
 const userMenusItems: any = [ { key: '1', label: '用户中心', icon: <UserOutlined /> }];
 // Title component
 const TitleComponent = () => (title ? <div className={styles.Ht_title}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from '../style.less';
 import { Tooltip, Tag } from 'antd';
 import { panelTab } from '@/ConfigSystemSettings';
