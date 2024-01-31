@@ -18,16 +18,16 @@ yarn start
 yarn install && yarn build
 ```
 
-### 更多站点相关配置
+### 系统配置
 `/src/ConfigSystemSettings/index.ts` 
 
-#### IconFont 图库
-`iconfont.cn`
-`账号：13502060262`
+### IconFont 
+地址：`iconfont.cn`
+账号：`13502060262`
 
 
-### 国际化 (4个地方需要配置)
-`src/locale`目录下定义语言，规则：**语言-国家.ts**
+### 国际化
+`src/locale`目录下定义语言，文件命名规则：**语言（小写）-国家（大写）.ts**
 ```js
 
 # 第1步 开启国际化
@@ -37,7 +37,7 @@ export const defaultLanguage = 'zh-CN'; // 默认语言
 
 # 第2步 语言切换菜单，增加对应选择项
 // /src/layouts/language.tsx
-const languageItems: any = [ 
+const languageItems: any = [
   { key: 'zh-CN', label: '中文' }, 
   { key: 'en-US', label: 'English' },
   ···
@@ -64,5 +64,4 @@ const localeArr: any = {
   "en-US": enUS,
   ····
 }
-
 ```
