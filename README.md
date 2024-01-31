@@ -19,12 +19,11 @@ yarn install && yarn build
 ```
 
 ### 更多站点相关配置
-`/src/ConfigSystemSettings/index.ts` Logo、水印、初始页，国际化 等等
+`/src/ConfigSystemSettings/index.ts` 
 
-#### iconfont `iconfont.cn``账号：13502060262`
-
-
-
+#### IconFont 图库
+`iconfont.cn`
+`账号：13502060262`
 
 
 ### 国际化 (4个地方需要配置)
