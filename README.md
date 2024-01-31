@@ -5,7 +5,7 @@ Nodejs 20 / React 18 / Umi 4 / Ant-design 5
 ```
 
 
-### 开发环境启动
+### 启动
 
 ```shell
 yarn
@@ -18,8 +18,14 @@ yarn start
 yarn install && yarn build
 ```
 
-### 站点相关配置
-/src/ConfigSystemSettings/index.ts
+### 更多站点相关配置
+```shell
+// /src/ConfigSystemSettings/index.ts
+// Logo、水印、初始页，IconFont 等等
+···
+```
+
+
 
 ### 国际化 (4个地方需要配置)
 `src/locale`目录下定义语言，规则：**语言-国家.ts**
