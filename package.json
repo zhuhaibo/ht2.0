@@ -6,7 +6,8 @@
     "build": "umi build",
     "postinstall": "umi setup",
     "setup": "umi setup",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "format": "prettier --write \"src/**/*.tsx\""
   },
   "dependencies": {
     "@ant-design/pro-components": "^2.6.42",
@@ -23,6 +24,7 @@
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
     "@umijs/plugins": "^4.1.0",
+    "prettier": "^3.2.4",
     "typescript": "^5.0.3",
     "umi": "^4.0.88"
   }

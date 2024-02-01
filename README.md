@@ -18,7 +18,7 @@ yarn start
 yarn install && yarn build
 ```
 
-### 系统配置
+### 配置
 `/src/ConfigSystemSettings/index.ts` 
 
 ### IconFont 

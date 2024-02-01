@@ -1,24 +1,27 @@
-
-import React from 'react';
-import {history} from 'umi';
-import { Button, Result } from 'antd';
-import { localesMessage } from '@/utils/common';
+import React from "react";
+import { history } from "umi";
+import { Button, Result } from "antd";
+import { localesMessage } from "@/utils/common";
 // import { ProTable } from '@ant-design/pro-components';
 
 const App: React.FC = () => (
-  <>
-    <Result
-          status="success"
-          title={localesMessage('welcome')}
-          subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
-          extra={[
-            <Button type="primary" key="console" onClick={ ()=> history.push('/home') }>
-              To Home
-            </Button>,
-            <Button key="buy">Buy Again</Button>,
-          ]}
+    <>
+        <Result
+            status="success"
+            title={localesMessage("welcome")}
+            subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
+            extra={[
+                <Button
+                    type="primary"
+                    key="console"
+                    onClick={() => history.push("/home")}
+                >
+                    To Home
+                </Button>,
+                <Button key="buy">Buy Again</Button>,
+            ]}
         />
-    {/* <ProTable 
+        {/* <ProTable 
       columns={[
         {
           dataIndex: 'index',
@@ -42,7 +45,7 @@ const App: React.FC = () => (
         },
       ]}
     /> */}
-  </>
+    </>
 );
 
 export default App;
