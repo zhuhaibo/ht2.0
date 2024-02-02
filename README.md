@@ -19,7 +19,7 @@ yarn install && yarn build
 ```
 
 ### 配置
-`/src/ConfigSystemSettings/index.ts` 
+`/config/defaultSettings.ts` 
 
 ### IconFont 
 地址：`iconfont.cn`
@@ -31,9 +31,11 @@ yarn install && yarn build
 ```js
 
 # 第1步 开启国际化
-// /src/ConfigSystemSettings/index.ts
-export const locale = true; // 是否开启国际化
-export const defaultLanguage = 'zh-CN'; // 默认语言
+// /config/defaultSettings.ts
+{
+  locale:true; // 是否开启国际化
+  defaultLanguage: 'zh-CN'; // 默认语言
+}
 
 # 第2步 语言切换菜单，增加对应选择项
 // /src/layouts/language.tsx

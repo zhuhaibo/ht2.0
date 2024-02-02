@@ -1,9 +1,7 @@
-import React from "react";
-import { history } from "umi";
+import { history, useModel } from "umi";
 import styles from "../style.less";
 import QueueAnim from "rc-queue-anim";
-import { title, logo, minlogo, locale } from "@/ConfigSystemSettings";
-import { Space, Dropdown, Button, Badge, Modal, message, Tooltip } from "antd";
+import { Space, Dropdown, Button, Badge, Modal, Tooltip } from "antd";
 import {
     UserOutlined,
     LogoutOutlined,
@@ -16,44 +14,34 @@ import {
 import { useCommonStore } from "@/hooks";
 import LanguageComponent from "../Language/language";
 import PanelTabComponent from "../PanelTab";
+import { localesMessage } from "@/utils/common";
 
-const userMenusItems: any = [
-    { key: "1", label: "用户中心", icon: <UserOutlined /> },
-];
-// Title component
-const TitleComponent = () =>
-    title ? (
-        <div className={styles.Ht_title}>
-            <h1 title={title}>{title}</h1>
-            <p>Transnational railway digital document service platform</p>
-        </div>
-    ) : null;
-// Logo component
-const LogoComponent = () => {
-    const { commonState } = useCommonStore();
-    return (
-        <div
-            className={styles.Ht_logo}
-            style={{ width: commonState.collapsed ? 50 : 250 }}
-        >
-            {commonState.collapsed ? (
-                <img src={minlogo} alt={title} />
-            ) : (
-                <img src={logo} alt={title} />
-            )}
-        </div>
-    );
-};
 const Index = () => {
-    const [messageApi, messageContextHolder] = message.useMessage();
+    const { initialState } = useModel("@@initialState");
+    const { title, subtitle, logo, minlogo, locale, panelTab } =
+        initialState || {};
+    const userMenusItems: any = [
+        {
+            key: "1",
+            label: locale ? localesMessage("userCenter") : "用户中心",
+            icon: <UserOutlined />,
+        },
+    ];
     // user - out
     const [modal, contextHolder] = Modal.useModal();
+    const modalTitle = locale ? localesMessage("prompt") : "提示！";
+    const modalContent = locale
+        ? localesMessage("isLogout")
+        : "是否确定退出系统 ...";
+    const modalButton = locale ? localesMessage("yes") : "是";
     const outHandle = (e: any) => {
         if (e.key === "out") {
+            console.log(modalTitle, modalContent);
+
             modal.confirm({
-                title: "提示！",
+                title: modalTitle,
                 icon: <ExclamationCircleOutlined />,
-                content: "是否确定退出系统 ...",
+                content: modalContent,
                 closable: true,
                 footer: [
                     <Button
@@ -62,12 +50,11 @@ const Index = () => {
                         danger
                         style={{ float: "right" }}
                         onClick={() => {
-                            messageApi.error("已退出登录！");
                             Modal.destroyAll();
                             history.push("/login");
                         }}
                     >
-                        确认
+                        {modalButton}
                     </Button>,
                 ],
             });
@@ -81,6 +68,34 @@ const Index = () => {
             document.exitFullscreen();
         }
     };
+    // Title component
+    const TitleComponent = () =>
+        title ? (
+            <div className={styles.Ht_title}>
+                <h1 title={title}>
+                    {locale
+                        ? localesMessage("sysTitle")
+                        : "弘泰天元数据管理系统"}
+                </h1>
+                <p>{subtitle}</p>
+            </div>
+        ) : null;
+    // Logo component
+    const LogoComponent = () => {
+        const { commonState } = useCommonStore();
+        return (
+            <div
+                className={styles.Ht_logo}
+                style={{ width: commonState.collapsed ? 50 : 250 }}
+            >
+                {commonState.collapsed ? (
+                    <img src={minlogo} alt={title} />
+                ) : (
+                    <img src={logo} alt={title} />
+                )}
+            </div>
+        );
+    };
     return (
         <QueueAnim animConfig={[{ opacity: [1, 0], translateY: [0, -50] }]}>
             <div className={styles.Ht_topbar} key="RenderTopBar">
@@ -92,13 +107,25 @@ const Index = () => {
                             <div className={styles.tools}>
                                 <Space size={20}>
                                     {locale && <LanguageComponent />}
-                                    <Tooltip title="全屏">
+                                    <Tooltip
+                                        title={
+                                            locale
+                                                ? localesMessage("fullScreen")
+                                                : "全屏"
+                                        }
+                                    >
                                         <Button
                                             onClick={fullScreen}
                                             icon={<FullscreenOutlined />}
                                         ></Button>
                                     </Tooltip>
-                                    <Tooltip title="通知">
+                                    <Tooltip
+                                        title={
+                                            locale
+                                                ? localesMessage("notice")
+                                                : "通知"
+                                        }
+                                    >
                                         <Badge count={5}>
                                             <Button
                                                 icon={<AliwangwangOutlined />}
@@ -116,7 +143,7 @@ const Index = () => {
                                             key: "out",
                                             danger: true,
                                             icon: <LogoutOutlined />,
-                                            label: "退出系统",
+                                            label: localesMessage("logout"),
                                         },
                                     ]),
                                     onClick: outHandle,
@@ -125,16 +152,19 @@ const Index = () => {
                                 <div className={styles.users}>
                                     <Space>
                                         <HomeFilled />
-                                        <span>北京弘泰天元科技有限公司</span>
+                                        <span>
+                                            {locale
+                                                ? localesMessage("userName")
+                                                : "北京弘泰天元科技有限公司"}
+                                        </span>
                                         <DownOutlined />
                                     </Space>
                                 </div>
                             </Dropdown>
                             {contextHolder}
-                            {messageContextHolder}
                         </div>
                     </div>
-                    <PanelTabComponent />
+                    {panelTab && <PanelTabComponent />}
                 </div>
             </div>
         </QueueAnim>

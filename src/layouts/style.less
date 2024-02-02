@@ -67,6 +67,7 @@ input[type="text"],input[type="password"],textarea{outline-style:none;}
         overflow: hidden;
         padding-right: 20px;
         display: flex;
+        justify-content: end;
       }
       .historyContent {
         overflow: hidden;
@@ -86,18 +87,20 @@ input[type="text"],input[type="password"],textarea{outline-style:none;}
             padding: 0 14px;
             width: max-content;
             .tagDiv {
-              padding: 2px 5px;
+              padding: 3px 8px 3px 10px;
               cursor: pointer;
-              margin: 7px;
+              margin: 5px;
+              height: 30px;
+              transform: all 0.5s;
               &:hover {
-                border: 1px solid #77aefc;
+                border: 1px solid #77aefca1;
                 background-color: #77aefc56;
+                transform: all 0.5s;
               }
               .tagIcon {
-                // color: #b2b2b2;
                 float: right;
                 margin-top: 5px;
-                margin-left: 5px;
+                margin-left: 2px;
                 &:hover {
                   color: #000;
                 }
@@ -190,7 +193,7 @@ input[type="text"],input[type="password"],textarea{outline-style:none;}
     }
     .menusDiv {
       z-index: 999;
-      height: calc(100vh - 80px);
+      height: calc(100vh - 60px);
       position: fixed;
       backdrop-filter: blur(10px);
       box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
@@ -199,13 +202,12 @@ input[type="text"],input[type="password"],textarea{outline-style:none;}
         border-inline-end: none;
       }
       .menusUser {
-        height: 60px;
+        height: 40px;
         background-color: #eff8ff;
         margin-bottom: 2px;
         display: flex;
         justify-content: center;
         align-items: center;
-        border-bottom: 1px solid #e9e9e9;
         box-shadow: -4px -1px 4px 1px rgba(0, 0, 0, 0.1);
         color: #555;
         p { cursor: pointer; }

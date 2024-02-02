@@ -3,16 +3,18 @@ import { Space, Dropdown } from "antd";
 import { GlobalOutlined } from "@ant-design/icons";
 import i18n from "i18next";
 import { useState } from "react";
-import { defaultLanguage } from "@/ConfigSystemSettings";
+import { useModel } from "umi";
 import { useCommonStore } from "@/hooks";
-const langs = localStorage.getItem("lang");
-const lng = langs ? langs : defaultLanguage;
-const languageItems: any = [
-    { key: "zh-CN", label: "中文" },
-    { key: "en-US", label: "English" },
-];
 
 export default function () {
+    const { initialState } = useModel("@@initialState");
+    const { defaultLanguage } = initialState || {};
+    const langs = localStorage.getItem("lang");
+    const lng = langs ? langs : defaultLanguage;
+    const languageItems: any = [
+        { key: "zh-CN", label: "中文" },
+        { key: "en-US", label: "English" },
+    ];
     const { commonState, set } = useCommonStore();
     const [lang, setLang] = useState(
         languageItems.filter((res: any) => res.key === lng)[0]?.label ||

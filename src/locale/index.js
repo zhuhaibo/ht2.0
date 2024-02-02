@@ -1,12 +1,12 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import { defaultLanguage } from "@/ConfigSystemSettings";
+import initialState from "../../config/defaultSettings";
 // 导入语言资源文件
-import enUS from "./locales/en-US.json";
-import zhCN from "./locales/zh-CN.json";
+import enUS from "./locales/en-US.js";
+import zhCN from "./locales/zh-CN.js";
 
 const langs = localStorage.getItem("lang");
-const lng = langs ? langs : defaultLanguage;
+const lng = langs ? langs : initialState.defaultLanguage;
 
 // 设置 i18n 配置
 i18n.use(initReactI18next).init({
@@ -15,7 +15,7 @@ i18n.use(initReactI18next).init({
     "zh-CN": { translation: zhCN },
     "en-US": { translation: enUS },
   },
-  fallbackLng: defaultLanguage, // 回退语言
+  fallbackLng: initialState.defaultLanguage, // 回退语言
   interpolation: {
     escapeValue: false, // 不转义特殊字符
   },

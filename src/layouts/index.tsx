@@ -1,14 +1,11 @@
-import { Outlet } from "umi";
+import { Outlet, useModel } from "umi";
 import styles from "./style.less";
 import RenderMenus from "./Menus/menus";
 import RenderTopBar from "./TopBar/topbar";
-import PanelTabComponent from "./PanelTab/HistoryRouter";
 import QueueAnim from "rc-queue-anim";
 import { I18nextProvider, useTranslation } from "react-i18next";
-import { waterMarkTitle, panelTab } from "@/ConfigSystemSettings";
 import { WaterMark } from "@ant-design/pro-components";
 import { CommonStoreProvider } from "@/hooks";
-import { defaultLanguage } from "@/ConfigSystemSettings";
 import { ConfigProvider } from "antd";
 
 // antd 国际化配置
@@ -20,6 +17,8 @@ const localeArr: any = {
 };
 
 export default function () {
+    const { initialState } = useModel("@@initialState");
+    const { waterMarkTitle, panelTab, defaultLanguage } = initialState || {};
     const { i18n } = useTranslation();
     const styleParams = panelTab
         ? { marginTop: 40, minHeight: "calc(100vh - 160px)" }
@@ -47,13 +46,7 @@ export default function () {
                                         className="queue-simple"
                                     >
                                         <div key="outlet">
-                                            {panelTab ? (
-                                                <PanelTabComponent
-                                                    Outlet={<Outlet />}
-                                                />
-                                            ) : (
-                                                <Outlet />
-                                            )}
+                                            <Outlet />
                                         </div>
                                     </QueueAnim>
                                 </div>

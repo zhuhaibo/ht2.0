@@ -1,15 +1,21 @@
-import { history } from "umi";
-import { Spin, Menu } from "antd";
-import { locale } from "@/ConfigSystemSettings";
+import { history, useModel } from "umi";
+import { Spin, Menu, Tooltip } from "antd";
 import styles from "../style.less";
 import routerMenusArr from "./menus.json";
 import { Iconfont } from "@/utils/common";
 import { useEffect, useState } from "react";
-import { LoadingOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import {
+    LoadingOutlined,
+    MenuFoldOutlined,
+    BugOutlined,
+} from "@ant-design/icons";
 import { useCommonStore } from "@/hooks";
 import i18Json from "@/locale";
+import _ from "lodash";
 
 const Index = () => {
+    const { initialState } = useModel("@@initialState");
+    const { locale, panelTab } = initialState || {};
     // 公共状态
     const { commonState, set } = useCommonStore();
     // 状态管理
@@ -30,6 +36,22 @@ const Index = () => {
                         2,
                         element.code.length,
                     );
+                    // 记录历史菜单
+                    if (panelTab) {
+                        const addHistoryRouter = [
+                            ...commonState.historyRouter,
+                            {
+                                el: element,
+                                key: element.id,
+                                label: element.name,
+                            },
+                        ];
+                        set({
+                            ...commonState,
+                            historyRouterActive: element,
+                            historyRouter: _.uniqBy(addHistoryRouter, "el.id"),
+                        });
+                    }
                     history.push("/" + codeStr.replace(/:/g, "/"));
                 }
                 if (element.id !== e.key && element?.children?.length > 0) {
@@ -113,8 +135,13 @@ const Index = () => {
         // 名称国际化
         const isLocaleMenuName = (name: string) =>
             locale
-                ? (translation ? translation[name] : name) ||
-                  `##Locale Error: (${name})`
+                ? (translation ? translation[name] : name) || (
+                      <Tooltip title={`国际化语言包未找到：${name} `}>
+                          <div style={{ color: "red" }}>
+                              <BugOutlined /> undefined
+                          </div>
+                      </Tooltip>
+                  )
                 : name;
         // 数组重构
         const getMenusItem = (v: any) => ({
