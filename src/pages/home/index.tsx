@@ -1,6 +1,9 @@
-import { useModel } from "umi";
-export default function () {
-    const { initialState } = useModel("@@initialState");
+import { Input, DatePicker } from "antd";
 
-    return initialState.clientId;
+export default function () {
+    return (
+        <div>
+            <DatePicker style={{ width: 200 }} />
+        </div>
+    );
 }

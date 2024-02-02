@@ -1,4 +1,5 @@
 import initialState from "../config/defaultSettings";
+import { matchRoutes } from "umi";
 
 export function render(oldRender: any) {
     // 写入默认语言
@@ -19,4 +20,13 @@ export function render(oldRender: any) {
 // initialState
 export async function getInitialState() {
     return initialState;
+}
+// 路由变化
+export function onRouteChange({ clientRoutes, location }: any) {
+    const route: any = matchRoutes(clientRoutes, location.pathname)?.pop()
+        ?.route;
+    console.log("router change, check access!");
+    if (route) {
+        document.title = initialState.title + " - " + route.name;
+    }
 }

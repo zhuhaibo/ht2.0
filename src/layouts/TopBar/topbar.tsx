@@ -1,6 +1,10 @@
-import { history, useModel } from "umi";
 import styles from "../style.less";
 import QueueAnim from "rc-queue-anim";
+import { history, useModel } from "umi";
+import { useCommonStore } from "@/hooks";
+import PanelTabComponent from "../PanelTab";
+import { localesMessage } from "@/utils/common";
+import LanguageComponent from "../Language/language";
 import { Space, Dropdown, Button, Badge, Modal, Tooltip } from "antd";
 import {
     UserOutlined,
@@ -11,10 +15,6 @@ import {
     AliwangwangOutlined,
     ExclamationCircleOutlined,
 } from "@ant-design/icons";
-import { useCommonStore } from "@/hooks";
-import LanguageComponent from "../Language/language";
-import PanelTabComponent from "../PanelTab";
-import { localesMessage } from "@/utils/common";
 
 const Index = () => {
     const { initialState } = useModel("@@initialState");
@@ -36,8 +36,6 @@ const Index = () => {
     const modalButton = locale ? localesMessage("yes") : "是";
     const outHandle = (e: any) => {
         if (e.key === "out") {
-            console.log(modalTitle, modalContent);
-
             modal.confirm({
                 title: modalTitle,
                 icon: <ExclamationCircleOutlined />,
