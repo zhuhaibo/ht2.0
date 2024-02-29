@@ -1,32 +1,219 @@
-import initialState from "../config/defaultSettings";
-import { matchRoutes } from "umi";
+import {
+  AvatarDropdown,
+  AvatarName,
+  Footer,
+  Question,
+  SelectLang,
+  TitleContent,
+} from '@/components';
+import { RefreshUserDetailApi } from '@/services/Login/api';
+import { getToken } from '@/utils/localField';
+import { LinkOutlined } from '@ant-design/icons';
+import type { Settings as LayoutSettings } from '@ant-design/pro-components';
+import { SettingDrawer } from '@ant-design/pro-components';
+import type { MenuDataItem } from '@ant-design/pro-layout';
+import type { RunTimeLayoutConfig } from '@umijs/max';
+import { Link, history } from '@umijs/max';
+import QueueAnim from 'rc-queue-anim';
+import defaultSettings from '../config/defaultSettings';
+import layoutBackground from '../public/layout/layoutBackground.webp';
+import menuBackground from '../public/layout/menuBackground.webp';
+import globalStyle from './global.less';
+import { errorConfig } from './requestErrorConfig';
 
-export function render(oldRender: any) {
-    // 写入默认语言
-    if (localStorage.getItem("lang") == null) {
-        localStorage.setItem("lang", initialState.defaultLanguage);
+const isDev = process.env.NODE_ENV === 'development';
+const loginPath = '/login';
+
+/**
+ * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
+ * */
+export async function getInitialState(): Promise<{
+  settings?: Partial<LayoutSettings>;
+  currentUser?: API.CurrentUser;
+  loading?: boolean;
+  iconfontUrl?: string;
+  collapsed?: boolean;
+}> {
+  // 如果不是登录页面，执行
+  const { location } = history;
+  if (location.pathname !== loginPath) {
+    if (!getToken()) {
+      history.push(loginPath);
+    } else {
+      return RefreshUserDetailApi();
     }
-    // // 渲染前，做用户登陆状态及权限校验
-    // fetch('/api/auth').then((auth: any)=> {
-    //     if (auth.isLogin) { oldRender() }
-    //     else {
-    //         location.href = '/login';
-    //         oldRender()
-    //     }
-    // });
-    oldRender();
+  }
+  return {
+    iconfontUrl: undefined,
+    currentUser: undefined,
+    settings: defaultSettings as Partial<LayoutSettings>,
+  };
 }
 
-// initialState
-export async function getInitialState() {
-    return initialState;
-}
-// 路由变化
-export function onRouteChange({ clientRoutes, location }: any) {
-    const route: any = matchRoutes(clientRoutes, location.pathname)?.pop()
-        ?.route;
-    console.log("router change, check access!");
-    if (route) {
-        document.title = initialState.title + " - " + route.name;
-    }
-}
+/**
+ * 菜单渲染
+ * @param menu
+ */
+const menuDataRender = (menu: any[]): MenuDataItem[] => {
+  return menu.map((x) => {
+    return {
+      key: x.id,
+      name: x.name,
+      icon: x.icon,
+      path: x.path ? x.path : '',
+      parentKeys: x.parentId ? [x.parentId] : undefined,
+      children: x.children ? menuDataRender(x.children) : undefined,
+      target: x.target,
+    } as MenuDataItem;
+  });
+};
+
+// ProLayout 支持的api https://procomponents.ant.design/components/layout
+export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
+  return {
+    iconfontUrl: defaultSettings.iconfontUrl,
+    menuDataRender: () => menuDataRender(initialState.menu),
+    actionsRender: () => [<Question key="doc" />, <SelectLang key="SelectLang" />],
+    avatarProps: {
+      src: initialState?.currentUser?.avatar,
+      title: <AvatarName />,
+      render: (_, avatarChildren) => {
+        return <AvatarDropdown>{avatarChildren}</AvatarDropdown>;
+      },
+    },
+    //  title
+    headerContentRender: () => <TitleContent />,
+    // onMenuHeaderClick: () => {}, // logo 点击事件
+    onCollapse: (collapsed: boolean) => {
+      setInitialState((preInitialState) => ({
+        ...preInitialState,
+        collapsed,
+      }));
+    },
+    headerTitleRender: () => {
+      return !initialState.collapsed ? (
+        <div style={{ width: 256 }}>
+          <QueueAnim style={{ display: 'flex' }} type="left">
+            <div key="logoDiv" className={globalStyle.logoDiv}>
+              <div style={{ background: '#1677FF', width: '100%', color: '#fff', fontSize: 20 }}>
+                <img src="/logo.png" alt="" />
+              </div>
+            </div>
+          </QueueAnim>
+        </div>
+      ) : (
+        <div style={{ width: 65 }}>
+          <QueueAnim style={{ display: 'flex' }} type="right">
+            <div key="logoDiv" className={globalStyle.logoDiv}>
+              <div style={{ background: '#1677FF', width: '100%', color: '#fff', fontSize: 20 }}>
+                <img style={{ height: 30 }} src="/minlogo.png" alt="" />
+              </div>
+            </div>
+          </QueueAnim>
+        </div>
+      );
+    },
+    footerRender: () => <Footer />,
+    onPageChange: () => {
+      const { location } = history;
+      // 如果没有登录，重定向到 login
+      if (!initialState?.currentUser && location.pathname !== loginPath) {
+        history.push(loginPath);
+      }
+    },
+    bgLayoutImgList: [
+      {
+        src: layoutBackground,
+        left: 85,
+        bottom: 100,
+        height: '303px',
+      },
+      {
+        src: layoutBackground,
+        bottom: -28,
+        right: -45,
+        height: '303px',
+      },
+      {
+        src: menuBackground,
+        bottom: 0,
+        left: 0,
+        width: '331px',
+      },
+    ],
+    links: isDev
+      ? [
+          <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
+            <LinkOutlined />
+            <span>OpenAPI 文档</span>
+          </Link>,
+        ]
+      : [],
+    menuHeaderRender: () => false,
+    // 403
+    // unAccessible: <div>unAccessible Error: 403， 您无权访问本页面</div>,
+    // 增加一个 loading 的状态
+    childrenRender: (children) => {
+      // if (initialState?.loading) return <PageLoading />;
+      return (
+        <QueueAnim
+          delay={200}
+          animConfig={[
+            { opacity: [1, 0], translateY: [0, 50] },
+            { opacity: [1, 0], translateY: [0, -50] },
+          ]}
+        >
+          <div key="children">
+            {children}
+            {isDev && (
+              <SettingDrawer
+                disableUrlParams
+                enableDarkTheme
+                settings={initialState?.settings}
+                onSettingChange={(settings) => {
+                  setInitialState((preInitialState) => ({
+                    ...preInitialState,
+                    settings,
+                  }));
+                }}
+              />
+            )}
+          </div>
+        </QueueAnim>
+      );
+    },
+    ...initialState?.settings,
+  };
+};
+
+/**
+ * @name request 配置，可以配置错误处理
+ * 它基于 axios 和 ahooks 的 useRequest 提供了一套统一的网络请求和错误处理方案。
+ * @doc https://umijs.org/docs/max/request#配置
+ */
+export const request: any = {
+  ...errorConfig,
+  credentials: 'omit', // 默认请求是否带上cookie
+  requestInterceptors: [
+    (url: any, options: any) => {
+      const lang = localStorage.getItem('umi_locale') || defaultSettings.locale;
+      return {
+        url: BASE_API + url,
+        options: {
+          ...options,
+          headers: {
+            ...options.headers,
+            // 登录接口不需要token, 无token会重定向至登录页
+            'x-auth-token': url.endsWith('/login') ? '' : getToken(),
+            lang,
+            // 如果在授权时提供clientId则使用该clientId
+            clientId:
+              options.headers && options.headers['clientId']
+                ? options.headers['clientId']
+                : defaultSettings.clientId,
+          },
+        },
+      };
+    },
+  ],
+};

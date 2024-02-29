@@ -1,0 +1,119 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+}
+
+.colorWeak {
+  filter: invert(80%);
+}
+
+.ant-layout {
+  min-height: 100vh;
+}
+.ant-pro-sider.ant-layout-sider.ant-pro-sider-fixed {
+  left: unset;
+}
+
+canvas {
+  display: block;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+@media (max-width: 768px) {
+  .ant-table {
+    width: 100%;
+    overflow-x: auto;
+    &-thead > tr,
+    &-tbody > tr {
+      > th,
+      > td {
+        white-space: pre;
+        > span {
+          display: block;
+        }
+      }
+    }
+  }
+}
+.ant-pro-layout .ant-pro-layout-bg-list {
+  background: linear-gradient(#ffffff, #f9f9f9 100px);
+}
+.ant-layout .ant-layout-header {
+  box-shadow: 0 2px 3px -3px rgba(0, 0, 0, 0.1);
+}
+.ant-pro-layout .ant-layout-header.ant-pro-layout-header-fixed-header {
+  background: none;
+  backdrop-filter: blur(5px);
+}
+.ant-pro-setting-drawer-handle {
+  z-index: 2;
+}
+.ant-pro-global-header-collapsed-button {
+  margin-left: 16px;
+}
+.ant-pro-global-header {
+  margin: 0;
+  .ant-pro-global-header-logo {
+    margin: 0;
+    cursor: pointer;
+    img {
+      height: 60px;
+      transition: all 0.5s;
+    }
+    &:hover {
+      img {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+.logoDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 256px;
+  height: 80px;
+  text-align: center;
+  border-bottom: 1px solid rgb(243, 243, 243);
+}
+.titleDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  float: left;
+  margin-left: 30px;
+  line-height: normal;
+  &:hover {
+    h1,
+    p {
+      color: #000;
+    }
+  }
+  h1 {
+    height: 34px;
+    margin: 0;
+    overflow: hidden;
+    color: #333;
+    font-size: 24px;
+  }
+  p {
+    margin: 0;
+    font-size: 12px;
+  }
+}
