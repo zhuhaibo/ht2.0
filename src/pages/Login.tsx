@@ -2,6 +2,7 @@ import { Footer } from '@/components';
 import { login } from '@/services/Login/api';
 import { RefreshCaptchaApi } from '@/services/Login/login';
 import { setToken } from '@/utils/localField';
+import { versionCheck } from '@/utils/utils';
 import {
   AliyunOutlined,
   LockOutlined,
@@ -15,8 +16,6 @@ import { createStyles } from 'antd-style';
 import QueueAnim from 'rc-queue-anim';
 import React, { useEffect, useState } from 'react';
 import Settings from '../../config/defaultSettings';
-import { versionCheck } from '@/utils/utils';
-
 
 const useStyles = createStyles(({ token }) => {
   return {

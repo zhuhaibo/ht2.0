@@ -1,8 +1,6 @@
-// https://umijs.org/config/
-import { defineConfig, webpack } from '@umijs/max';
+import { defineConfig } from '@umijs/max';
 import { join } from 'path';
 import defaultSettings from './defaultSettings';
-// import proxy from './proxy';
 import routes from './routes';
 
 const { REACT_APP_ENV } = process.env;

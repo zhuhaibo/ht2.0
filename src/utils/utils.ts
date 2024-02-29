@@ -2,7 +2,6 @@ import { notification } from 'antd';
 import moment from 'moment';
 import defaultSettings from '../../config/defaultSettings';
 
-
 export const isBlank = (obj?: any) =>
   obj === null ||
   obj === undefined ||

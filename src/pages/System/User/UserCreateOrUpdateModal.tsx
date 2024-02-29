@@ -3,7 +3,6 @@ import { ColumnValidCheckApi, SaveOrUpdateUserApi } from '@/services/System/User
 import { parse } from '@/utils';
 import { convertToMoment } from '@/utils/utils';
 import { Col, DatePicker, Form, Input, Modal, Row, Select, message } from 'antd';
-import type { Store } from 'rc-field-form/es/interface';
 import { FC, useEffect, useState } from 'react';
 
 interface UserCreateOrUpdateModalProps {
@@ -61,7 +60,7 @@ const UserCreateOrUpdateModal: FC<UserCreateOrUpdateModalProps> = ({
     });
   };
 
-  const onFinish = (values: Store) => {
+  const onFinish = (values: any) => {
     setLoading(true);
     const data = { ...values };
     if (dataSource && dataSource.id) {

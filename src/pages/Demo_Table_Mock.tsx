@@ -1,11 +1,11 @@
-import { PageContainer } from '@ant-design/pro-layout';
+import { httpTableResultToRequestData, queryPageableConvert } from '@/utils/utils';
 import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable, TableDropdown } from '@ant-design/pro-components';
+import { PageContainer } from '@ant-design/pro-layout';
 import { Button, Dropdown, Space, Tag } from 'antd';
 import { useRef } from 'react';
 import request from 'umi-request';
-import { queryPageableConvert, httpTableResultToRequestData } from '@/utils/utils';
 
 type GithubIssueItem = {
   url: string;
@@ -140,17 +140,17 @@ const columns: ProColumns<GithubIssueItem>[] = [
 export default () => {
   const actionRef = useRef<ActionType>();
   return (
-    <PageContainer header={{title: '欢迎你，Demo User', subTitle: false}}>
+    <PageContainer header={{ title: '欢迎你，Demo User', subTitle: false }}>
       <ProTable<GithubIssueItem>
         columns={columns}
         actionRef={actionRef}
         cardBordered
-        request={async ( params ) => {
-           const res = await request('/api/demoTable',{
+        request={async (params) => {
+          const res = await request('/api/demoTable', {
             method: 'POST',
-            data: queryPageableConvert(params)
-           });
-           return httpTableResultToRequestData(res)
+            data: queryPageableConvert(params),
+          });
+          return httpTableResultToRequestData(res);
         }}
         editable={{
           type: 'multiple',

@@ -12,11 +12,11 @@ import { DownOutlined, PlusOutlined, QuestionCircleOutlined } from '@ant-design/
 import { PageContainer } from '@ant-design/pro-layout';
 import type { ActionType, ProColumns } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
-import { Button, Divider, Dropdown, Menu, message, Modal, Switch } from 'antd';
+import { Button, Divider, Dropdown, Menu, Modal, Switch, message } from 'antd';
 import type { FC } from 'react';
 import { useRef, useState } from 'react';
-import UserPasswordResetModal from './UserPasswordResetModal';
 import UserCreateOrUpdateModal from './UserCreateOrUpdateModal';
+import UserPasswordResetModal from './UserPasswordResetModal';
 import UserRole from './UserRoleModal';
 
 const TenantList: FC = () => {
