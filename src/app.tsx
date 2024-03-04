@@ -16,8 +16,8 @@ import type { RunTimeLayoutConfig } from '@umijs/max';
 import { Link, history } from '@umijs/max';
 import QueueAnim from 'rc-queue-anim';
 import defaultSettings from '../config/defaultSettings';
-import layoutBackground from '../public/layout/layoutBackground.webp';
-import menuBackground from '../public/layout/menuBackground.webp';
+import layoutBackground from '../public/layout/layoutBackground.png';
+import menuBackground from '../public/layout/menuBackground.png';
 import globalStyle from './global.less';
 import { errorConfig } from './requestErrorConfig';
 
@@ -27,13 +27,7 @@ const loginPath = '/login';
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
-export async function getInitialState(): Promise<{
-  settings?: Partial<LayoutSettings>;
-  currentUser?: API.CurrentUser;
-  loading?: boolean;
-  iconfontUrl?: string;
-  collapsed?: boolean;
-}> {
+export async function getInitialState() {
   // 如果不是登录页面，执行
   const { location } = history;
   if (location.pathname !== loginPath) {
@@ -69,10 +63,10 @@ const menuDataRender = (menu: any[]): MenuDataItem[] => {
 };
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
-export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
+export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: any) => {
   return {
     iconfontUrl: defaultSettings.iconfontUrl,
-    menuDataRender: () => menuDataRender(initialState.menu),
+    menuDataRender: () => menuDataRender(initialState?.menu),
     actionsRender: () => [<Question key="doc" />, <SelectLang key="SelectLang" />],
     avatarProps: {
       src: initialState?.currentUser?.avatar,
@@ -85,7 +79,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     headerContentRender: () => <TitleContent />,
     // onMenuHeaderClick: () => {}, // logo 点击事件
     onCollapse: (collapsed: boolean) => {
-      setInitialState((preInitialState) => ({
+      setInitialState((preInitialState: any) => ({
         ...preInitialState,
         collapsed,
       }));
@@ -171,7 +165,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
                 enableDarkTheme
                 settings={initialState?.settings}
                 onSettingChange={(settings) => {
-                  setInitialState((preInitialState) => ({
+                  setInitialState((preInitialState: any) => ({
                     ...preInitialState,
                     settings,
                   }));
