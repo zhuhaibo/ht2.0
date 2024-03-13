@@ -2,31 +2,25 @@ import { defineConfig } from '@umijs/max';
 import { join } from 'path';
 import defaultSettings from './defaultSettings';
 import routes from './routes';
+const { REACT_APP_ENV }: any = process.env;
 
-const { REACT_APP_ENV } = process.env;
-
-const getGlobalConfig = () => {
-  switch (REACT_APP_ENV) {
-    case 'dev':
-      return {
-        BASE_API: 'http://39.104.28.126:8112',
-      };
-    case 'qa':
-      return {
-        BASE_API: 'http://39.104.28.126:8112',
-      };
-    case 'prod':
-      return {
-        BASE_API: 'http://localhost:8080',
-      };
-    default:
-      return {};
-  }
-};
+const APIS: any = {
+  // 开发
+  'dev': 'http://39.104.28.126:8112',
+  // 测试
+  'qa': 'http://39.104.28.126:8112',
+  // 生产
+  'prod': 'http://localhost:8080',
+}
 
 export default defineConfig({
-  define: {
-    ...getGlobalConfig(),
+  define: { 
+    /**
+     * @name 接口地址
+     * @description 配置开发环境与生产环境的API接口访问地址
+     * @doc https://umijs.org/docs/api/config#hash
+     */
+    BASE_API: APIS[REACT_APP_ENV] || '' 
   },
   /**
    * @name 开启 hash 模式
