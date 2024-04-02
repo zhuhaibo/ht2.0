@@ -122,3 +122,13 @@ ol {
     margin: 16px;
   }
 }
+.runtime-keep-alive-tabs-layout {
+  .ant-tabs {
+    z-index: 3;
+    position: relative;
+    > div {
+      backdrop-filter: blur(5px);
+      background: none !important;
+    }
+  }
+}

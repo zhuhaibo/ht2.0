@@ -8,7 +8,7 @@ import {
 } from '@/utils/utils';
 import { FormOutlined } from '@ant-design/icons';
 import { ProTable } from '@ant-design/pro-components';
-import { getLocale, useIntl } from '@umijs/max';
+import { getLocale, useIntl, history } from '@umijs/max';
 
 function TableContainer(props: any) {
   const { actionRef, showModal, TableReload } = props.PropsJson;
@@ -36,6 +36,11 @@ function TableContainer(props: any) {
         id: 'productLibrary.table.codeZH',
         defaultMessage: '商品编码(中方)',
       }),
+      renderText: (text: string, record: any) => {
+        return <a onClick={()=>{
+          history.push(`/productlibrary/detail/${record.id}`)
+        }}>{text}</a>
+      }
     },
     {
       title: intl.formatMessage({

@@ -172,6 +172,10 @@ export default defineConfig({
   esbuildMinifyIIFE: true,
   requestRecord: {},
   // 多tabs布局，只需要配置下面两项即可
-  // keepalive: [/./],
-  // tabsLayout: {},
+  keepalive: [/./],
+  tabsLayout: {
+    // hasCustomTabs: true,
+    hasDropdown: true,
+    hasFixedHeader: true,
+  },
 });

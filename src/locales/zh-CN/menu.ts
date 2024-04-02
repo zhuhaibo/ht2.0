@@ -14,7 +14,8 @@ export default {
   'menu.system.dict': '字典管理',
 
   'menu.productlibrary': '商品库管理',
-
+  'menu.productlibrary.list': '商品库列表',
+  'menusDdetail': '商品库详情'
   // 'menu.more-blocks': '更多区块',
   // 'menu.home': '首页',
   // 'menu.admin': '管理页',

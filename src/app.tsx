@@ -149,32 +149,33 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: a
     // 增加一个 loading 的状态
     childrenRender: (children) => {
       // if (initialState?.loading) return <PageLoading />;
-      return (
-        <QueueAnim
-          delay={200}
-          animConfig={[
-            { opacity: [1, 0], translateY: [0, 50] },
-            { opacity: [1, 0], translateY: [0, -50] },
-          ]}
-        >
-          <div key="children">
-            {children}
-            {isDev && (
-              <SettingDrawer
-                disableUrlParams
-                enableDarkTheme
-                settings={initialState?.settings}
-                onSettingChange={(settings) => {
-                  setInitialState((preInitialState: any) => ({
-                    ...preInitialState,
-                    settings,
-                  }));
-                }}
-              />
-            )}
-          </div>
-        </QueueAnim>
-      );
+      return children;
+      // return (
+      //   <QueueAnim
+      //     delay={200}
+      //     animConfig={[
+      //       { opacity: [1, 0], translateY: [0, 50] },
+      //       { opacity: [1, 0], translateY: [0, -50] },
+      //     ]}
+      //   >
+      //     <div key="children">
+      //       {children}
+      //       {isDev && (
+      //         <SettingDrawer
+      //           disableUrlParams
+      //           enableDarkTheme
+      //           settings={initialState?.settings}
+      //           onSettingChange={(settings) => {
+      //             setInitialState((preInitialState: any) => ({
+      //               ...preInitialState,
+      //               settings,
+      //             }));
+      //           }}
+      //         />
+      //       )}
+      //     </div>
+      //   </QueueAnim>
+      // );
     },
     ...initialState?.settings,
   };

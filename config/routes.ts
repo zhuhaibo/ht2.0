@@ -39,10 +39,24 @@ export default [
   },
   // 商品库管理
   {
-    path: '/productlibrary',
     name: 'productlibrary',
+    path: '/productlibrary',
     access: 'm:productlibrary',
-    component: './ProductLibrary',
+    routes: [
+      { path: '/productlibrary', redirect: '/productlibrary/list' },
+      {
+        path: 'list',
+        name: 'list',
+        access: 'm:productlibrary:list',
+        component: './ProductLibrary/List',
+      },
+      {
+        path: 'detail/:id',
+        title: 'menusDdetail',
+        access: 'o:productlibrary:detail',
+        component: './ProductLibrary/Detail',
+      },
+    ]
   },
   // 系统管理
   {

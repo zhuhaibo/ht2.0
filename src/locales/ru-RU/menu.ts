@@ -13,6 +13,8 @@ export default {
   'menu.system.dict': 'Управление словарем',
 
   'menu.productlibrary': 'Товарный склад',
+  'menu.productlibrary.list': 'Список библиотеки продуктов',
+  'menusDdetail': 'информация о продукте',
 
   // 'menu.more-blocks': '更多区块',
   // 'menu.home': '首页',

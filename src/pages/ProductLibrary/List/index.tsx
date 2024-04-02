@@ -1,8 +1,8 @@
 import type { ActionType } from '@ant-design/pro-components';
 import { PageContainer } from '@ant-design/pro-components';
 import { useRef, useState } from 'react';
-import ModalComponent from './Modal';
-import TableComponent from './Table';
+import ModalComponent from '../Modal';
+import TableComponent from '../Table';
 
 export const waitTimePromise = async (time: number = 100) => {
   return new Promise((resolve) => {
