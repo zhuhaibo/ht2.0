@@ -176,6 +176,6 @@ export default defineConfig({
   tabsLayout: {
     // hasCustomTabs: true,
     hasDropdown: true,
-    hasFixedHeader: true,
+    // hasFixedHeader: true,
   },
 });

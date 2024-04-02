@@ -39,20 +39,21 @@ export default [
   },
   // 商品库管理
   {
-    name: 'productlibrary',
+    title: '商品库管理',
     path: '/productlibrary',
     access: 'm:productlibrary',
     routes: [
       { path: '/productlibrary', redirect: '/productlibrary/list' },
       {
+        title: 'list',
         path: 'list',
-        name: 'list',
         access: 'm:productlibrary:list',
         component: './ProductLibrary/List',
       },
       {
-        path: 'detail/:id',
         title: 'menusDdetail',
+        path: 'detail/:id',
+        hideInMenu: true,
         access: 'o:productlibrary:detail',
         component: './ProductLibrary/Detail',
       },

@@ -8,11 +8,15 @@ body,
     'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
     'Noto Color Emoji';
 }
-
+p {
+  margin: 0;
+}
 .colorWeak {
   filter: invert(80%);
 }
-
+.runtime-keep-alive-tabs-layout {
+  margin-bottom: 0 !important;
+}
 .ant-layout {
   min-height: 100vh;
 }
@@ -60,6 +64,7 @@ ol {
 .ant-pro-layout .ant-layout-header.ant-pro-layout-header-fixed-header {
   background: none;
   backdrop-filter: blur(5px);
+  border-bottom: 0;
 }
 .ant-pro-setting-drawer-handle {
   z-index: 2;
@@ -73,6 +78,7 @@ ol {
     margin: 0;
     cursor: pointer;
     img {
+      max-width: 100%;
       height: 60px;
       transition: all 0.5s;
     }
@@ -106,7 +112,7 @@ ol {
     }
   }
   h1 {
-    height: 34px;
+    height: 32px;
     margin: 0;
     overflow: hidden;
     color: #333;
@@ -118,9 +124,22 @@ ol {
   }
 }
 .runtime-keep-alive-tabs-layout {
-  .ant-tabs-top >.ant-tabs-nav {
-    margin: 16px;
+  .ant-tabs-top > .ant-tabs-nav {
+    margin: 5px;
   }
+}
+
+.ant-pro-layout .ant-pro-layout-content {
+  padding: 0;
+}
+.pages {
+  margin: 0 20px;
+}
+.ant-pro-page-container-children-container {
+  padding-inline: 18px;
+}
+.ant-pro-page-container-children-container-no-header {
+  padding-block-start: 18px;
 }
 .runtime-keep-alive-tabs-layout {
   .ant-tabs {
