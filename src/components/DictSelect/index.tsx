@@ -52,7 +52,7 @@ const DictSelect: FC<DictSelectProps> = (props) => {
       }),
     {
       // 是否组件初始化自动加载
-      manual: !props.load,
+      manual: props.defaultSelectTopOne ? false : props.load ? false : true,
       debounceInterval: 500,
       // @ts-ignore
       loadMore: true,
