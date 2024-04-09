@@ -23,6 +23,8 @@ interface DictSelectProps {
   defaultSelectTopOne?: boolean;
   // 禁止延迟加载数据 默认点击时加载
   disableLazyLoadingData?: boolean;
+  // 默认加载数据
+  load?: boolean,
   defaultValue?: SelectValue;
   value?: SelectValue;
   // form表单监听使用, 编码一般使用onChange
@@ -50,7 +52,7 @@ const DictSelect: FC<DictSelectProps> = (props) => {
       }),
     {
       // 是否组件初始化自动加载
-      manual: !props.defaultSelectTopOne || props.disableLazyLoadingData,
+      manual: !props.load,
       debounceInterval: 500,
       // @ts-ignore
       loadMore: true,
