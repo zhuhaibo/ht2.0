@@ -8,9 +8,9 @@ import {
 } from '@/components';
 import { RefreshUserDetailApi } from '@/services/Login/api';
 import { getToken } from '@/utils/localField';
-import { LinkOutlined } from '@ant-design/icons';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
-import { SettingDrawer } from '@ant-design/pro-components';
+// import { SettingDrawer } from '@ant-design/pro-components';
 import type { MenuDataItem } from '@ant-design/pro-layout';
 import type { RunTimeLayoutConfig } from '@umijs/max';
 import { Link, history } from '@umijs/max';
@@ -20,6 +20,8 @@ import layoutBackground from '../public/layout/layoutBackground.png';
 import menuBackground from '../public/layout/menuBackground.png';
 import globalStyle from './global.less';
 import { errorConfig } from './requestErrorConfig';
+import { ConfigProvider } from 'antd';
+
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/login';
@@ -63,7 +65,7 @@ const menuDataRender = (menu: any[]): MenuDataItem[] => {
 };
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
-export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: any) => {
+export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: any ) => {
   return {
     iconfontUrl: defaultSettings.iconfontUrl,
     menuDataRender: () => menuDataRender(initialState?.menu),
@@ -78,6 +80,8 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: a
     //  title
     headerContentRender: () => <TitleContent />,
     // onMenuHeaderClick: () => {}, // logo 点击事件
+    collapsedButtonRender: false,
+    collapsed: initialState.collapsed,
     onCollapse: (collapsed: boolean) => {
       setInitialState((preInitialState: any) => ({
         ...preInitialState,
@@ -85,27 +89,47 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: a
       }));
     },
     headerTitleRender: () => {
-      return !initialState.collapsed ? (
-        <div style={{ width: 256 }}>
-          <QueueAnim style={{ display: 'flex' }} type="left">
+      const cspd = !initialState.collapsed;
+      return(
+        <div style={{ width: cspd ? 257 : 65, transform: 'all 0.5s' }}>
+          <QueueAnim style={{ display: 'flex' }} type={cspd ? 'left' : 'right'}>
             <div key="logoDiv" className={globalStyle.logoDiv}>
-              <div style={{ background: '#1677FF', width: '100%', color: '#fff', fontSize: 20 }}>
-                <img src="/logo.png" alt="" />
+              <div style={{background: '#1677FF', width: '100%', color: '#fff', fontSize: 20, height: cspd ? 86 : 'auto' }}>
+                {cspd ? (
+                  <div style={{ margin: '0 18px', borderBottom: '1px solid #73adff' }}>
+                  <img src={defaultSettings.logo} alt="" />
+                </div>
+                ):(
+                  <img style={{ height: 30 }} src={defaultSettings.logo} alt="" />
+                )}
               </div>
             </div>
           </QueueAnim>
         </div>
-      ) : (
-        <div style={{ width: 65 }}>
-          <QueueAnim style={{ display: 'flex' }} type="right">
-            <div key="logoDiv" className={globalStyle.logoDiv}>
-              <div style={{ background: '#1677FF', width: '100%', color: '#fff', fontSize: 20 }}>
-                <img style={{ height: 30 }} src="/minlogo.png" alt="" />
-              </div>
-            </div>
-          </QueueAnim>
-        </div>
-      );
+      )
+      // return !initialState.collapsed ? (
+      //   <div style={{ width: 257, transform: 'all 0.5s' }}>
+      //     <QueueAnim style={{ display: 'flex' }} type="left">
+      //       <div key="logoDiv" className={globalStyle.logoDiv}>
+      //         <div style={{background: '#1677FF', width: '100%', color: '#fff', fontSize: 20, height: 86 }}>
+      //           <div style={{ margin: '0 18px', borderBottom: '1px solid #73adff' }}>
+      //             <img src={defaultSettings.logo} alt="" />
+      //           </div>
+      //         </div>
+      //       </div>
+      //     </QueueAnim>
+      //   </div>
+      // ) : (
+      //   <div style={{ width: 65, transform: 'all 0.5s' }}>
+      //     <QueueAnim style={{ display: 'flex' }} type="right">
+      //       <div key="logoDiv" className={globalStyle.logoDiv}>
+      //         <div style={{ background: '#1677FF', width: '100%', color: '#fff', fontSize: 20 }}>
+      //           <img style={{ height: 30 }} src={defaultSettings.logo} alt="" />
+      //         </div>
+      //       </div>
+      //     </QueueAnim>
+      //   </div>
+      // );
     },
     footerRender: () => <Footer />,
     onPageChange: () => {
@@ -135,21 +159,30 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: a
         width: '331px',
       },
     ],
-    links: isDev
-      ? [
-          <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
-            <LinkOutlined />
-            <span>OpenAPI 文档</span>
-          </Link>,
-        ]
-      : [],
+    links: [
+      <div className='menusCollapsedDiv' onClick={()=>{
+        setInitialState((preInitialState: any) => ({
+          ...preInitialState,
+          collapsed: !initialState.collapsed,
+        }));
+
+
+        // setInitialState((preInitialState: any) => ({
+        //   ...preInitialState,
+        //   collapsed: !initialState.collapsed,
+        // }));
+        
+      }}>
+        {initialState.collapsed ? <MenuUnfoldOutlined style={{fontSize: 18, marginLeft: 20}} /> : <MenuFoldOutlined style={{fontSize: 18, marginLeft: 20}} />}
+      </div>,
+    ],
     menuHeaderRender: () => false,
     // 403
     // unAccessible: <div>unAccessible Error: 403， 您无权访问本页面</div>,
     // 增加一个 loading 的状态
     childrenRender: (children) => {
       // if (initialState?.loading) return <PageLoading />;
-      return children;
+      return <ConfigProvider theme={defaultSettings.token}>{children}</ConfigProvider>;
       // return (
       //   <QueueAnim
       //     delay={200}
@@ -198,6 +231,8 @@ export const request: any = {
           ...options,
           headers: {
             ...options.headers,
+            //直接定义语言类型
+            'Accept-Language': lang,
             // 登录接口不需要token, 无token会重定向至登录页
             'x-auth-token': url.endsWith('/login') ? '' : getToken(),
             lang,

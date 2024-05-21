@@ -214,8 +214,12 @@ function TableContainer(props: any) {
     <ProTable<any>
       rowKey="id"
       columns={columns}
+      bordered
+      size='small'
       scroll={{ x: 1500 }}
       actionRef={actionRef}
+      pagination={{defaultPageSize: 10}}
+      rowClassName={(record, i): any => (i % 2 === 1 ? 'rowTableEven' : 'rowTableOdd')}
       search={{ layout: 'vertical', labelWidth: 'auto' }}
       request={async (params = {}) => {
         const result = await QueryCommodityStandardList(

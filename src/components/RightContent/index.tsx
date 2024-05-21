@@ -1,6 +1,6 @@
-import { FullscreenOutlined } from '@ant-design/icons';
+import { FullscreenOutlined, GlobalOutlined } from '@ant-design/icons';
 import { SelectLang as UmiSelectLang, useIntl } from '@umijs/max';
-import { Tooltip } from 'antd';
+import { Tooltip, Tag } from 'antd';
 import QueueAnim from 'rc-queue-anim';
 import defaultSettings from '../../../config/defaultSettings';
 import globalStyle from '../../global.less';
@@ -16,9 +16,23 @@ export const TitleContent = () => {
   // header center title
   return (
     <QueueAnim type="top">
-      <div key="titleDiv" className={globalStyle.titleDiv}>
+      {/* <div key="titleDiv" className={globalStyle.titleDiv}>
         <h1>{intl.formatMessage({ id: 'title' })}</h1>
         <p>{defaultSettings.subTitle}</p>
+      </div> */}
+      <div key="titleDiv" style={{ display: 'flex', alignItems: 'center' }}>
+        <div className={globalStyle.titleDiv}>
+          <h1>{intl.formatMessage({ id: 'title' })}</h1>
+          <p>{defaultSettings.subTitle} </p>
+        </div>
+        <Tag color="#1677ff" style={{ height: 24, marginLeft: 20 }}>
+          {' '}
+          <GlobalOutlined />{' '}
+          {intl.formatMessage({
+            id: 'typeTitle',
+            defaultMessage: '海关总署',
+          })}{' '}
+        </Tag>
       </div>
     </QueueAnim>
   );

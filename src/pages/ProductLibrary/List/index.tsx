@@ -37,7 +37,7 @@ export default () => {
     actionRef.current?.reload();
   };
   return (
-    <PageContainer header={{ title: null, subTitle: null }}>
+    <PageContainer header={{ title: null, subTitle: null }} breadcrumb={undefined}>
       {/* 商品库 Table */}
       <TableComponent
         PropsJson={{
