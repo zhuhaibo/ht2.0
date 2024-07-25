@@ -13,7 +13,7 @@ import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 // import { SettingDrawer } from '@ant-design/pro-components';
 import type { MenuDataItem } from '@ant-design/pro-layout';
 import type { RunTimeLayoutConfig } from '@umijs/max';
-import { Link, history } from '@umijs/max';
+import { Link, history, Helmet, Outlet } from '@umijs/max';
 import QueueAnim from 'rc-queue-anim';
 import defaultSettings from '../config/defaultSettings';
 import layoutBackground from '../public/layout/layoutBackground.png';
@@ -107,29 +107,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: a
           </QueueAnim>
         </div>
       )
-      // return !initialState.collapsed ? (
-      //   <div style={{ width: 257, transform: 'all 0.5s' }}>
-      //     <QueueAnim style={{ display: 'flex' }} type="left">
-      //       <div key="logoDiv" className={globalStyle.logoDiv}>
-      //         <div style={{background: '#1677FF', width: '100%', color: '#fff', fontSize: 20, height: 86 }}>
-      //           <div style={{ margin: '0 18px', borderBottom: '1px solid #73adff' }}>
-      //             <img src={defaultSettings.logo} alt="" />
-      //           </div>
-      //         </div>
-      //       </div>
-      //     </QueueAnim>
-      //   </div>
-      // ) : (
-      //   <div style={{ width: 65, transform: 'all 0.5s' }}>
-      //     <QueueAnim style={{ display: 'flex' }} type="right">
-      //       <div key="logoDiv" className={globalStyle.logoDiv}>
-      //         <div style={{ background: '#1677FF', width: '100%', color: '#fff', fontSize: 20 }}>
-      //           <img style={{ height: 30 }} src={defaultSettings.logo} alt="" />
-      //         </div>
-      //       </div>
-      //     </QueueAnim>
-      //   </div>
-      // );
     },
     footerRender: () => <Footer />,
     onPageChange: () => {
@@ -165,13 +142,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: a
           ...preInitialState,
           collapsed: !initialState.collapsed,
         }));
-
-
-        // setInitialState((preInitialState: any) => ({
-        //   ...preInitialState,
-        //   collapsed: !initialState.collapsed,
-        // }));
-        
       }}>
         {initialState.collapsed ? <MenuUnfoldOutlined style={{fontSize: 18, marginLeft: 20}} /> : <MenuFoldOutlined style={{fontSize: 18, marginLeft: 20}} />}
       </div>,
@@ -180,37 +150,13 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: a
     // 403
     // unAccessible: <div>unAccessible Error: 403， 您无权访问本页面</div>,
     // 增加一个 loading 的状态
-    childrenRender: (children) => {
-      // if (initialState?.loading) return <PageLoading />;
-      return <ConfigProvider theme={defaultSettings.token}>{children}</ConfigProvider>;
-      // return (
-      //   <QueueAnim
-      //     delay={200}
-      //     animConfig={[
-      //       { opacity: [1, 0], translateY: [0, 50] },
-      //       { opacity: [1, 0], translateY: [0, -50] },
-      //     ]}
-      //   >
-      //     <div key="children">
-      //       {children}
-      //       {isDev && (
-      //         <SettingDrawer
-      //           disableUrlParams
-      //           enableDarkTheme
-      //           settings={initialState?.settings}
-      //           onSettingChange={(settings) => {
-      //             setInitialState((preInitialState: any) => ({
-      //               ...preInitialState,
-      //               settings,
-      //             }));
-      //           }}
-      //         />
-      //       )}
-      //     </div>
-      //   </QueueAnim>
-      // );
-    },
     ...initialState?.settings,
+    childrenRender: (children) => <ConfigProvider theme={defaultSettings.token}>
+      {children}
+      <Helmet>
+        <title>{defaultSettings.title}</title>
+      </Helmet>
+    </ConfigProvider>,
   };
 };
 

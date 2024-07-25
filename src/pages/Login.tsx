@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons';
 import { LoginForm, ProFormCheckbox, ProFormText } from '@ant-design/pro-components';
 import { FormattedMessage, Helmet, SelectLang, setLocale, useIntl } from '@umijs/max';
-import { Spin, Tabs, message } from 'antd';
+import { Spin, Tabs, message, Input } from 'antd';
 import { createStyles } from 'antd-style';
 import QueueAnim from 'rc-queue-anim';
 import React, { useEffect, useState } from 'react';
@@ -102,11 +102,7 @@ const Login: React.FC = () => {
       <div className={styles.container} key="container">
         <Helmet>
           <title>
-            {intl.formatMessage({
-              id: 'menu.login',
-              defaultMessage: '登录页',
-            })}
-            - {intl.formatMessage({ id: 'title', defaultMessage: `${Settings.title}` })}
+            {intl.formatMessage({ id: 'title', defaultMessage: `${Settings.title}` })}
           </title>
         </Helmet>
         <Lang />

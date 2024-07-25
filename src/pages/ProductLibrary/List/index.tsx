@@ -3,6 +3,7 @@ import { PageContainer } from '@ant-design/pro-components';
 import { useRef, useState } from 'react';
 import ModalComponent from '../Modal';
 import TableComponent from '../Table';
+import { Helmet } from '@umijs/max';
 
 export const waitTimePromise = async (time: number = 100) => {
   return new Promise((resolve) => {
