@@ -11,13 +11,13 @@ import {
 import { DownOutlined, PlusOutlined, QuestionCircleOutlined } from '@ant-design/icons/lib';
 import { PageContainer } from '@ant-design/pro-layout';
 import type { ActionType, ProColumns } from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
 import { Button, Divider, Dropdown, Menu, Modal, Switch, message } from 'antd';
 import type { FC } from 'react';
 import { useRef, useState } from 'react';
 import UserCreateOrUpdateModal from './UserCreateOrUpdateModal';
 import UserPasswordResetModal from './UserPasswordResetModal';
 import UserRole from './UserRoleModal';
+import CommonTable from '@/components/CommonTable';
 
 const TenantList: FC = () => {
   const actionRef = useRef<ActionType>();
@@ -223,12 +223,12 @@ const TenantList: FC = () => {
 
   return (
     <PageContainer title={false} subTitle={false} breadcrumb={undefined}>
-      <ProTable<any>
+      <CommonTable
         actionRef={actionRef}
         rowKey="id"
         bordered
         size='small'
-        toolBarRender={(action, { selectedRows }) => [
+        toolBarRender={(action: any, { selectedRows }: any) => [
           <Button
             icon={<PlusOutlined />}
             type="primary"

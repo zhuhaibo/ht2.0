@@ -9,6 +9,7 @@ import {
 import { FormOutlined } from '@ant-design/icons';
 import { ProTable } from '@ant-design/pro-components';
 import { getLocale, useIntl, history } from '@umijs/max';
+import CommonTable from '@/components/CommonTable';
 
 function TableContainer(props: any) {
   const { actionRef, showModal, TableReload } = props.PropsJson;
@@ -211,16 +212,9 @@ function TableContainer(props: any) {
   // },[location]);
 
   return (
-    <ProTable<any>
-      rowKey="id"
+    <CommonTable
       columns={columns}
-      bordered
-      size='small'
-      scroll={{ x: 1500 }}
       actionRef={actionRef}
-      pagination={{defaultPageSize: 10}}
-      rowClassName={(record, i): any => (i % 2 === 1 ? 'rowTableEven' : 'rowTableOdd')}
-      search={{ layout: 'vertical', labelWidth: 'auto' }}
       request={async (params = {}) => {
         const result = await QueryCommodityStandardList(
           queryPageableConvert(formatToDateRange(params, 'optTime')),
