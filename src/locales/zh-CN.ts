@@ -8,7 +8,7 @@ import table from './zh-CN/table';
 import tabsLayout from './zh-CN/tabsLayout';
 
 export default {
-  title: '哈萨克斯坦跨境电商监管系通',
+  title: '哈萨克斯坦跨境电商监管系统',
   enter: '请输入',
   select: '请选择',
   note: '备注',

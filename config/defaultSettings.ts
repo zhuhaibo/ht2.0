@@ -4,7 +4,7 @@
 const Settings = {
   version: '1.0.0',
   // 站点标题
-  title: '哈萨克斯坦跨境电商监管系通',
+  title: '哈萨克斯坦跨境电商监管系统',
   // 副标题
   subTitle: 'Transnational railway digital document service platform',
   // 应用名称
@@ -13,7 +13,7 @@ const Settings = {
   defaultRouter: '/productlibrary/list',
   logo: '/logo.jpg',
   // 图标库
-  iconfontUrl: '//at.alicdn.com/t/c/font_3982504_b3gbavwvwvv.js',
+  iconfontUrl: '//at.alicdn.com/t/c/font_3982504_o23kmcb652p.js',
   // 国际化
   locale: 'zh-CN',
   navTheme: 'light',
@@ -35,6 +35,12 @@ const Settings = {
         headerSplitColor: '#1677ff',
         headerColor: '#fff',
         headerBorderRadius: 0,
+        cellPaddingBlockSM: 8,
+        cellPaddingInlineSM: 8,
+        cellPaddingBlockMD: 8,
+        cellPaddingInlineMD: 8,
+        cellPaddingBlockLG: 8,
+        cellPaddingInlineLG: 8,
       },
     },
     // 参见ts声明，demo 见文档，通过token 修改样式

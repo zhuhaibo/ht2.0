@@ -226,6 +226,8 @@ const TenantList: FC = () => {
       <ProTable<any>
         actionRef={actionRef}
         rowKey="id"
+        bordered
+        size='small'
         toolBarRender={(action, { selectedRows }) => [
           <Button
             icon={<PlusOutlined />}

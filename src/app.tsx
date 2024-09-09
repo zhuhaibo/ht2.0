@@ -78,7 +78,10 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: a
       },
     },
     //  title
-    headerContentRender: () => <TitleContent />,
+    headerContentRender: () => {
+      const cspd = !initialState.collapsed;
+      return <TitleContent collapsed={cspd} />
+    },
     // onMenuHeaderClick: () => {}, // logo 点击事件
     collapsedButtonRender: false,
     collapsed: initialState.collapsed,
@@ -88,26 +91,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: a
         collapsed,
       }));
     },
-    headerTitleRender: () => {
-      const cspd = !initialState.collapsed;
-      return(
-        <div style={{ width: cspd ? 257 : 65, transform: 'all 0.5s' }}>
-          <QueueAnim style={{ display: 'flex' }} type={cspd ? 'left' : 'right'}>
-            <div key="logoDiv" className={globalStyle.logoDiv}>
-              <div style={{background: '#1677FF', width: '100%', color: '#fff', fontSize: 20, height: cspd ? 86 : 'auto' }}>
-                {cspd ? (
-                  <div style={{ margin: '0 18px', borderBottom: '1px solid #73adff' }}>
-                  <img src={defaultSettings.logo} alt="" />
-                </div>
-                ):(
-                  <img style={{ height: 30 }} src={defaultSettings.logo} alt="" />
-                )}
-              </div>
-            </div>
-          </QueueAnim>
-        </div>
-      )
-    },
+    headerTitleRender: () => (false),
     footerRender: () => <Footer />,
     onPageChange: () => {
       const { location } = history;
@@ -119,9 +103,9 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: a
     bgLayoutImgList: [
       {
         src: layoutBackground,
-        left: 85,
-        bottom: 100,
-        height: '303px',
+        left: 150,
+        top: 20,
+        height: '260px',
       },
       {
         src: layoutBackground,
@@ -133,7 +117,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: a
         src: menuBackground,
         bottom: 0,
         left: 0,
-        width: '331px',
+        width: '255px',
       },
     ],
     links: [
@@ -143,7 +127,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: a
           collapsed: !initialState.collapsed,
         }));
       }}>
-        {initialState.collapsed ? <MenuUnfoldOutlined style={{fontSize: 18, marginLeft: 20}} /> : <MenuFoldOutlined style={{fontSize: 18, marginLeft: 20}} />}
+        {initialState.collapsed ? <MenuUnfoldOutlined style={{fontSize: 18, color: '#000'}} /> : <MenuFoldOutlined style={{fontSize: 18, color: '#000'}} />}
       </div>,
     ],
     menuHeaderRender: () => false,

@@ -8,31 +8,34 @@ import globalStyle from '../../global.less';
 export type SiderTheme = 'light' | 'dark';
 
 export const SelectLang = () => {
-  return <UmiSelectLang style={{ padding: 4 }} key="UmiSelectLang" />;
+  return <UmiSelectLang style={{ padding: 4, color: '#FFF' }} key="UmiSelectLang" />;
 };
 
-export const TitleContent = () => {
+export const TitleContent = ({collapsed}: {collapsed: boolean}) => {
   const intl = useIntl();
   // header center title
   return (
     <QueueAnim type="top">
-      {/* <div key="titleDiv" className={globalStyle.titleDiv}>
-        <h1>{intl.formatMessage({ id: 'title' })}</h1>
-        <p>{defaultSettings.subTitle}</p>
-      </div> */}
-      <div key="titleDiv" style={{ display: 'flex', alignItems: 'center' }}>
-        <div className={globalStyle.titleDiv}>
-          <h1>{intl.formatMessage({ id: 'title' })}</h1>
-          <p>{defaultSettings.subTitle} </p>
+      <div  key="topBarDiv" className="topBarDiv">
+        <div style={{float: 'left'}}>
+          <div className={globalStyle.logoDiv}>
+            <img style={{height: '70px'}} src={defaultSettings.logo} alt="" />
+          </div>
         </div>
-        <Tag color="#1677ff" style={{ height: 24, marginLeft: 20 }}>
-          {' '}
-          <GlobalOutlined />{' '}
-          {intl.formatMessage({
-            id: 'typeTitle',
-            defaultMessage: '海关总署',
-          })}{' '}
-        </Tag>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className={globalStyle.titleDiv}>
+            <h1>{intl.formatMessage({ id: 'title' })}</h1>
+            <p>{defaultSettings.subTitle} </p>
+          </div>
+          <Tag color="#1677ff" style={{ height: 24, marginLeft: 20 }}>
+            {' '}
+            <GlobalOutlined />{' '}
+            {intl.formatMessage({
+              id: 'typeTitle',
+              defaultMessage: '海关总署',
+            })}{' '}
+          </Tag>
+        </div>
       </div>
     </QueueAnim>
   );
@@ -52,7 +55,7 @@ export const Question = () => {
       <Tooltip
         title={intl.formatMessage({ id: 'component.tools.fullScreen', defaultMessage: '全屏' })}
       >
-        <FullscreenOutlined onClick={fullScreen} style={{ fontSize: 18, color: '#888' }} />
+        <FullscreenOutlined onClick={fullScreen} style={{ fontSize: 18, color: '#FFF' }} />
       </Tooltip>
     </div>
   );
