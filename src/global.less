@@ -4,9 +4,9 @@
 // 菜单
 @background-color-menu: #FFF; 
 @background-color-menu-childer: #FFF;
-@background-color-menu-childer-active: #bed7ff;
+@background-color-menu-childer-active: #b1ceff61;
 // tabs menu
-@tabs-page-active-color: #3c55e8;
+@tabs-page-active-color: #2477ff;
 @tabs-page-color: #FFF;
 
 
@@ -211,12 +211,21 @@ ol {
   z-index: 1;
 }
 .ant-menu-light .ant-menu-submenu-selected >.ant-menu-submenu-title {
-  background: #bed7ff61;
+  background: #dfebff61;
 }
 .ant-menu-light .ant-menu-item-selected, .ant-tabs-card.ant-tabs-top >div>.ant-tabs-nav .ant-tabs-tab-active {
   background: @background-color-menu-childer-active;
   .ant-pro-base-menu-inline-item-text {
     color: #333;
+  }
+}
+.ant-tabs-card.ant-tabs-top >div>.ant-tabs-nav .ant-tabs-tab-active {
+  background-color: @tabs-page-active-color;
+  .ant-tabs-tab-btn {
+    color: #fff;
+  } 
+  .anticon svg {
+    color: #fff;
   }
 }
 .ant-menu-submenu {
@@ -277,7 +286,7 @@ ol {
 }
 .ant-tabs-card >.ant-tabs-nav .ant-tabs-tab {
   padding: 6px 16px;
-  height: 30px;;
+  height: 30px;
 }
 
 .rowTableEven {
