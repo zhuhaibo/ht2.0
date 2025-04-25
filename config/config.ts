@@ -5,7 +5,7 @@ const { REACT_APP_ENV }: any = process.env;
 
 const APIS: any = {
   // 开发
-  dev: 'http://39.104.28.126:8112',
+  dev: 'http://123.57.143.121:32042',
   // 测试
   qa: 'http://39.104.28.126:8112',
   // 生产

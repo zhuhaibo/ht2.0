@@ -10,7 +10,7 @@ const Settings = {
   // 应用名称
   clientId: 'manager',
   // 默认访问的路由页面
-  defaultRouter: '/productlibrary/list',
+  defaultRouter: '/welcome',
   logo: '/logo.jpg',
   // 图标库
   iconfontUrl: '//at.alicdn.com/t/c/font_3982504_o23kmcb652p.js',

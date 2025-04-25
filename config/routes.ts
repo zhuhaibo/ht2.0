@@ -37,25 +37,19 @@ export default [
     component: './Welcome',
     footerRender: false, // 不展示页脚
   },
-  // 商品库管理
+
+  // 报关单管理
   {
-    title: '商品库管理',
-    path: '/productlibrary',
-    access: 'm:productlibrary',
+    name: 'customsBill',
+    path: 'customsBill',
+    access: 'm:customsBill',
     routes: [
-      { path: '/productlibrary', redirect: '/productlibrary/list' },
+      { path: '/customsBill', redirect: '/customsBill/GeneralGoods' },
       {
-        title: 'list',
-        path: 'list',
-        access: 'm:productlibrary:list',
+        name: 'GeneralGoods',
+        path: 'GeneralGoods',
+        access: 'm:customsBill:GeneralGoods',
         component: './ProductLibrary/List',
-      },
-      {
-        title: 'menusDdetail',
-        path: 'detail/:id',
-        hideInMenu: true,
-        access: 'o:productlibrary:detail',
-        component: './ProductLibrary/Detail',
       },
     ]
   },

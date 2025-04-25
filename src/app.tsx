@@ -10,15 +10,12 @@ import { RefreshUserDetailApi } from '@/services/Login/api';
 import { getToken } from '@/utils/localField';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
-// import { SettingDrawer } from '@ant-design/pro-components';
 import type { MenuDataItem } from '@ant-design/pro-layout';
 import type { RunTimeLayoutConfig } from '@umijs/max';
-import { Link, history, Helmet, Outlet } from '@umijs/max';
-import QueueAnim from 'rc-queue-anim';
+import { history, Helmet } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
 import layoutBackground from '../public/layout/layoutBackground.png';
 import menuBackground from '../public/layout/menuBackground.png';
-import globalStyle from './global.less';
 import { errorConfig } from './requestErrorConfig';
 import { ConfigProvider } from 'antd';
 
@@ -67,6 +64,7 @@ const menuDataRender = (menu: any[]): MenuDataItem[] => {
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: any ) => {
   return {
+    pageTitleRender:false,
     iconfontUrl: defaultSettings.iconfontUrl,
     menuDataRender: () => menuDataRender(initialState?.menu),
     actionsRender: () => [<Question key="doc" />, <SelectLang key="SelectLang" />],
@@ -137,9 +135,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }: a
     ...initialState?.settings,
     childrenRender: (children) => <ConfigProvider theme={defaultSettings.token}>
       {children}
-      <Helmet>
-        <title>{defaultSettings.title}</title>
-      </Helmet>
     </ConfigProvider>,
   };
 };

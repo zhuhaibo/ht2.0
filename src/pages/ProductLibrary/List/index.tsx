@@ -33,9 +33,7 @@ export default () => {
   const ModalCancel = () => setIsModalOpen(false);
 
   // reRender Table
-  const TableReload = () => {
-    actionRef.current?.reload();
-  };
+  const TableReload = () => actionRef.current?.reload();
   return (
     <PageContainer header={{ title: null, subTitle: null }} breadcrumb={undefined}>
       {/* 商品库 Table */}

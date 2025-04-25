@@ -2,9 +2,9 @@
 @topbar-background-color: #b6dbf9;
 @topbar-background-color-red: #f5e1e3;
 // 菜单
-@background-color-menu: #FFF; 
-@background-color-menu-childer: #FFF;
-@background-color-menu-childer-active: #b1ceff61;
+@background-color-menu: #001082; 
+@background-color-menu-sub: #000; 
+@background-color-menu-childer-active: #ebeff6; //#b1ceff61;
 // tabs menu
 @tabs-page-active-color: #2477ff;
 @tabs-page-color: #FFF;
@@ -37,6 +37,18 @@ p {
 }
 .ant-pro-sider.ant-layout-sider.ant-pro-sider-fixed {
   left: unset;
+  // background-color: @background-color-menu;
+  // background: url(./assets/images/menubg.jpg) no-repeat top left;
+  // background-size: 150% 100%;
+  // animation: waterFlow 50s infinite;
+  // animation-timing-function: linear;
+  // animation-direction: normal;
+  // animation-play-state: running;
+  // animation-fill-mode: forwards;
+  // animation-delay: 0s;
+  // animation-iteration-count: infinite;
+  // animation-name: waterFlow;
+  // animation-duration: 50s;
 }
 
 canvas {
@@ -211,7 +223,7 @@ ol {
   z-index: 1;
 }
 .ant-menu-light .ant-menu-submenu-selected >.ant-menu-submenu-title {
-  background: #dfebff61;
+  color: @background-color-menu-sub;
 }
 .ant-menu-light .ant-menu-item-selected, .ant-tabs-card.ant-tabs-top >div>.ant-tabs-nav .ant-tabs-tab-active {
   background: @background-color-menu-childer-active;
@@ -236,9 +248,15 @@ ol {
   }
 }
 
-.ant-menu-inline.ant-menu-root .ant-menu-item {
-  .ant-pro-base-menu-inline-item-title .ant-pro-base-menu-inline-item-text {
-    padding-left: 15px;
+.ant-menu-sub {
+  .ant-menu-item-only-child {
+    .ant-menu-title-content {
+      .ant-pro-base-menu-inline-item-title {
+        > span.ant-pro-base-menu-inline-item-text {
+          padding-left: 15px;
+        }
+      }
+    }
   }
 }
 .ant-menu .ant-menu-submenu-open.ant-menu-submenu-inline>.ant-menu-submenu-title>.ant-menu-submenu-arrow::before {
